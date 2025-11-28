@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single-File JS Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    
+    
+</head>
+<body>
+    
+    <ul>Mark Ed S. Kadusale <br> <br>
+       Aldrine B. Arroyo <br> <br>
+       Amar A. Lubo <br> <br>
+       JunJun C. Encierto <br> <br>
+     Emmanuel A. Ambrona</ul>
+
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+
+        <div class="buttons">
+            <input type="button" value="C" onclick="clearDisplay()" class="clear">
+            <input type="button" value="(" onclick="appendToDisplay('(')">
+            <input type="button" value=")" onclick="appendToDisplay(')')">
+            <input type="button" value="÷" onclick="appendToDisplay('/')" class="operator">
+
+            <input type="button" value="7" onclick="appendToDisplay('7')">
+            <input type="button" value="8" onclick="appendToDisplay('8')">
+            <input type="button" value="9" onclick="appendToDisplay('9')">
+            <input type="button" value="x" onclick="appendToDisplay('*')" class="operator">
+
+            <input type="button" value="4" onclick="appendToDisplay('4')">
+            <input type="button" value="5" onclick="appendToDisplay('5')">
+            <input type="button" value="6" onclick="appendToDisplay('6')">
+            <input type="button" value="-" onclick="appendToDisplay('-')" class="operator">
+
+            <input type="button" value="1" onclick="appendToDisplay('1')">
+            <input type="button" value="2" onclick="appendToDisplay('2')">
+            <input type="button" value="3" onclick="appendToDisplay('3')">
+            <input type="button" value="+" onclick="appendToDisplay('+')" class="operator">
+
+            <input type="button" value="0" onclick="appendToDisplay('0')">
+            <input type="button" value="." onclick="appendToDisplay('.')">
+            <input type="button" value="=" onclick="calculateResult()" class="equal operator">
+            <input type="button" value="DEL" onclick="deleteLast()" class="clear"> 
+        </div>
+    </div>
+
+    <script>
+       
+        const display = document.getElementById('display');
+
+       
+        function appendToDisplay(value) {
+            
+            if (display.value === 'Error') {
+                display.value = ''; 
+            }
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+      
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+       
+        function calculateResult() {
+            try {
+             
+                let result = eval(display.value);
+                
+              
+                if (result === Infinity || isNaN(result)) {
+                    display.value = 'Error';
+                    return;
+                }
+
+                if (typeof result === 'number' && !Number.isInteger(result)) {
+                    display.value = parseFloat(result.toFixed(10));
+                } else {
+                    display.value = result;
+                }
+
+            } catch (error) {
+               
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
